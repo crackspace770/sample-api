@@ -23,7 +23,7 @@ app.use('/api/products', productRoutes);
 
 
 //database connection
-mongoose.connect('mongodb+srv://crackspace990:mU76h8mtl8jG3fX5@backenddb.boqeb.mongodb.net/Node_API?retryWrites=true&w=majority&appName=BackendDB', {
+mongoose.connect('Insert your own MongoDB Connection', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
 }).then(() => {
