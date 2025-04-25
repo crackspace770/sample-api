@@ -1,24 +1,32 @@
 const express = require('express')
 const mongoose = require('mongoose');
+const multer = require('multer');
 const productRoutes = require('./routes/product.route.js');
+const authRoutes = require('./routes/auth.route.js');
 const app = express()
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+const storage = multer.memoryStorage(); // Store files in memory (or use diskStorage for local storage)
+const upload = multer({ storage: storage });
 
-app.listen(3000, () => { 
-  console.log('Server is running on http://localhost:3000')
+
+
+app.listen(8080, () => { 
+  console.log('Server is running on http://localhost:8080')
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello World From Node API Server 2005')
+  res.send('Hello World From Node API Server 2025')
 });
 
 
 //routes
 app.use('/api/products', productRoutes);
+
+app.use('/api/auth', authRoutes);
 
 
 
