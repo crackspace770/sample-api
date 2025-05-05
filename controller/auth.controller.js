@@ -48,7 +48,7 @@ const userLogin = async (req, res) => {
         user_id: user.user_id,
         name: user.name,
         email: user.email,
-        token: `Bearer ${token}`,
+        token: `${token}`,
       }
     });
 
@@ -108,7 +108,45 @@ const userRegister = async (req, res) => {
   }
 };
 
+const getUserId = async (req, res) => {
+  try {
+    const { user_id, email } = req.body;
+
+    if (!user_id || !email) {
+      return res.status(400).json({
+        sukses: false,
+        message: 'User ID and email are required.'
+      });
+    }
+
+    const user = await Auth.findOne({ _id: user_id, email });
+
+    if (!user) {
+      return res.status(404).json({
+        sukses: false,
+        message: 'User not found.'
+      });
+    }
+
+    res.status(200).json({
+      sukses: true,
+      message: 'User retrieved successfully',
+      user
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      sukses: false,
+      message: 'Internal server error',
+      error
+    });
+  }
+};
+
+
 module.exports = {
     userLogin,
-    userRegister
+    userRegister,
+    getUserId
 };

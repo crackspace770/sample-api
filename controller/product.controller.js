@@ -127,7 +127,45 @@ const getProductId = async (req, res) => {
     }
 };
 
+const searchProduct = async (req, res) => {
+    try {
+      const { name_product, email } = req.body;
 
+      
+      if (!email) {
+        return res.status(400).json({
+          sukses: false,
+          message: 'Email is required',
+        });
+      }
+  
+  
+      if (!name_product) {
+        return res.status(400).json({
+          sukses: false,
+          message: 'Product name is required for search',
+        });
+      }
+  
+      const products = await Product.find({
+        name_product: { $regex: name_product, $options: 'i' } // case-insensitive search
+      });
+  
+      res.status(200).json({
+        sukses: true,
+        message: 'Product(s) retrieved successfully',
+        product: products,
+      });
+  
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        sukses: false,
+        message: 'Internal server error',
+        error,
+      });
+    }
+  };
 
 
 const filterProduct = async(req, res) => {
@@ -250,6 +288,7 @@ const updateProduct = async (req, res) => {
 module.exports ={ 
     getProducts, 
     getProductId,
+    searchProduct,
     createProduct,
     deleteProduct,
     updateProduct

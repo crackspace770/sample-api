@@ -1,8 +1,9 @@
 // renameProductNameField.js
 const mongoose = require('mongoose');
 const Product = require('../models/product.model'); // adjust the path as needed
+const { MONGO_URI } = require('./utils/const');
 
-mongoose.connect('mongodb+srv://crackspace990:mU76h8mtl8jG3fX5@backenddb.boqeb.mongodb.net/Node_API?retryWrites=true&w=majority&appName=BackendDB', {
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

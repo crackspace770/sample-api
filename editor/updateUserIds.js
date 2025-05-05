@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Auth = require('../models/auth.model.js'); // update the path if needed
+const { MONGO_URI } = require('./utils/const');
 
 // Replace this with your actual MongoDB URI
-const mongoUri = 'mongodb+srv://crackspace990:mU76h8mtl8jG3fX5@backenddb.boqeb.mongodb.net/Node_API?retryWrites=true&w=majority&appName=BackendDB'; // change this to your connection string
+const mongoUri = MONGO_URI; // change this to your connection string
 
 const addMissingUserIds = async () => {
   try {

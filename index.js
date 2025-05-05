@@ -12,6 +12,8 @@ app.use(express.urlencoded({extended: false}));
 const storage = multer.memoryStorage(); // Store files in memory (or use diskStorage for local storage)
 const upload = multer({ storage: storage });
 
+const { MONGO_URI } = require('./utils/const');
+
 
 
 app.listen(8080, () => { 
@@ -31,7 +33,7 @@ app.use('/api/auth', authRoutes);
 
 
 //database connection
-mongoose.connect('mongodb+srv://crackspace990:mU76h8mtl8jG3fX5@backenddb.boqeb.mongodb.net/Node_API?retryWrites=true&w=majority&appName=BackendDB', {
+mongoose.connect(MONGO_URI, {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
 }).then(() => {
